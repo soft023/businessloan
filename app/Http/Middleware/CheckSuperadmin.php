@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Auth;
+class CheckSuperadmin
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        $role  = Auth()->user()->role;
+
+        if($role == "SA"){
+
+             return $next($request);
+        }
+
+        return redirect('/');
+       
+    }
+}
